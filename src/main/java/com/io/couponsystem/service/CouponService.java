@@ -1,6 +1,7 @@
 package com.io.couponsystem.service;
 
 import com.io.couponsystem.domain.Coupon;
+import com.io.couponsystem.repository.CouponCountRepository;
 import com.io.couponsystem.repository.CouponRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,9 +11,10 @@ import org.springframework.stereotype.Service;
 public class CouponService {
 
     private final CouponRepository couponRepository;
+    private final CouponCountRepository couponCountRepository;
 
     public void apply(Long memberId) {
-        long count = couponRepository.count();
+        Long count = couponCountRepository.increase();
 
         if (count > 100) {
             return;
